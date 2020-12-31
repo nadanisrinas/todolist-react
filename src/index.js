@@ -7,7 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //redux
 import { Provider } from "react-redux";
 import store from "./store";
-
+import { getInitialTodo } from "../src/store/data/actions";
+store.dispatch(getInitialTodo());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

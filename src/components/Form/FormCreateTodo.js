@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import { Col, Form, FormGroup, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { addDataTodo } from "../../store/actions";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { editDataTodo } from "../../store/actions";
 
-const FormEditTodo = (props) => {
+const FormCreateTodo = (props) => {
   const history = useHistory();
+  let idToDo = useSelector((state) => state.dataReducer.dataTodo.length + 1);
   const dispatch = useDispatch();
-  const { dataDetail, toggleModalDetail } = props;
-  console.log(dataDetail);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  let idToDo = dataDetail ? dataDetail.id : "";
-  const [title, setTitle] = useState(dataDetail ? dataDetail.title : "");
-  const [description, setDescription] = useState(dataDetail ? dataDetail.description : "");
-  const [status, setStatus] = useState(dataDetail ? dataDetail.status : "");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState(0);
+
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const handleEdit = () => {
+  const handleCreate = async () => {
     dispatch(
-      editDataTodo({
+      addDataTodo({
         id: idToDo,
         title: title,
         description: description,
@@ -25,7 +24,7 @@ const FormEditTodo = (props) => {
         createdAt: new Date(),
       })
     );
-    // toggleModalDetail();
+    history.push("/");
   };
   return (
     <Form>
@@ -59,9 +58,9 @@ const FormEditTodo = (props) => {
           </Dropdown>
         </Col>
       </FormGroup>
-      <Button onClick={handleEdit}>Edit</Button>
+      <Button onClick={handleCreate}>Create To Do</Button>
     </Form>
   );
 };
 
-export default FormEditTodo;
+export default FormCreateTodo;

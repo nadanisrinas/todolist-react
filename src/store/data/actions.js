@@ -1,16 +1,35 @@
-import { ADD_TODO } from "./actionTypes";
+import { ADD_TODO, EDIT_TODO } from "./actionTypes";
+import axios from "axios";
 
 let nextTodoId = 0;
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 //add item data todo
-export const addDataTodo = (data) => {
+export const addDataTodo = (todos) => {
+  console.log("a");
   return {
     type: ADD_TODO,
     payload: {
-      id: 1,
-      title: data.title,
-      description: data.desc,
-      status: data.status,
-      createdAt: data.dateCreated,
+      todos,
     },
+  };
+};
+//edit item data todo
+export const editDataTodo = (todos) => {
+  return {
+    type: EDIT_TODO,
+    payload: {
+      todos,
+    },
+  };
+};
+
+export const getInitialTodo = () => {
+  return async (dispatch) => {
+    try {
+      let posts = await axios.get("https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list");
+      dispatch(addDataTodo(posts.data));
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
