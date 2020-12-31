@@ -1,9 +1,8 @@
-import { ADD_TODO, EDIT_TODO } from "./actionTypes";
+import { ADD_TODO, EDIT_TODO, DELETE_TODO } from "./actionTypes";
 const initialState = {
   dataTodo: [],
 };
 const dataReducer = (state = initialState, action) => {
-  console.log("action.payload", action.payload);
   switch (action.type) {
     case ADD_TODO:
       state = {
@@ -13,11 +12,18 @@ const dataReducer = (state = initialState, action) => {
       break;
 
     case EDIT_TODO:
-      let dataEdit;
-      state.dataTodo.map((todo) => (todo.id !== action.payload.todos.id ? (dataEdit = [action.payload.todos]) : (dataEdit = [])));
+      let dataEdit = state.dataTodo.map((todo) => (todo.id == action.payload.todos.id ? action.payload.todos : todo));
       state = {
         ...state,
-        dataTodo: state.dataTodo.filter((data) => dataEdit.id !== data.id).concat(dataEdit),
+        dataTodo: dataEdit,
+      };
+      break;
+
+    case DELETE_TODO:
+      let dataDelete = state.dataTodo.filter((todo) => todo.id !== action.payload.todos.id && todo);
+      state = {
+        ...state,
+        dataTodo: dataDelete,
       };
       break;
 

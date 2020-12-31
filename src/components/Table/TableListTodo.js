@@ -36,7 +36,7 @@ const TableListTodo = () => {
                 <td>{data.id}</td>
                 <td>{data.title}</td>
                 <td>{data.description}</td>
-                <td>{data.status === "0" ? "Not Complete" : "Complete"}</td>
+                <td>{data.status == "0" ? "Not Complete" : "Complete"}</td>
                 <td>{moment(data.createdAt, "YYYY-MM-DD hh:ss").format("DD-MM-YYYY")}</td>
                 <td>
                   <Button onClick={() => handleModalDetail(data)}>Detail</Button>
