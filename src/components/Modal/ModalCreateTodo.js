@@ -1,4 +1,4 @@
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, Container } from "reactstrap";
 import FormEditTodo from "../Form/FormEditTodo";
 
 const ModalCreateTodo = (props) => {

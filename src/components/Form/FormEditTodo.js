@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Col, Form, FormGroup, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
-import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { editDataTodo, deleteDataTodo } from "../../store/actions";
+import { editDataTodo } from "../../store/actions";
+// css
+import "../../assets/styles/button.css";
+import "../../assets/styles/label.css";
 
 const FormEditTodo = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { dataDetail, toggleModalDetail } = props;
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -24,19 +25,7 @@ const FormEditTodo = (props) => {
         createdAt: new Date(),
       })
     );
-    // toggleModalDetail();
-  };
-  const handleDelete = () => {
-    dispatch(
-      deleteDataTodo({
-        id: idToDo,
-        title: title,
-        description: description,
-        status: status,
-        createdAt: new Date(),
-      })
-    );
-    // toggleModalDetail();
+    toggleModalDetail();
   };
 
   return (
@@ -63,7 +52,9 @@ const FormEditTodo = (props) => {
         </Label>
         <Col sm={10}>
           <Dropdown color="" isOpen={dropdownOpen} toggle={toggle}>
-            <DropdownToggle caret>{status == 0 ? "Not Complete Yet" : "Complete"}</DropdownToggle>
+            <DropdownToggle color="" className={status == 0 ? "labelNotComplete" : "labelComplete"} caret>
+              {status == 0 ? "Not Complete Yet" : "Complete"}
+            </DropdownToggle>
             <DropdownMenu>
               <DropdownItem onClick={(e) => setStatus(1)}>Complete</DropdownItem>
               <DropdownItem onClick={(e) => setStatus(0)}>Not Complete Yet</DropdownItem>
@@ -71,10 +62,10 @@ const FormEditTodo = (props) => {
           </Dropdown>
         </Col>
       </FormGroup>
-      <Button color="primary" className="mr-2" onClick={handleEdit}>
+      <Button color="" className="mr-2 btnEdit" onClick={handleEdit}>
+        <span className="fa fa-edit pr-1"></span>
         Edit
       </Button>
-      {status == 0 && <Button onClick={handleDelete}>Delete</Button>}
     </Form>
   );
 };

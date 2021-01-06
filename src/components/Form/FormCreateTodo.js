@@ -48,9 +48,11 @@ const FormCreateTodo = (props) => {
         <Label for="status" sm={2}>
           status
         </Label>
-        <Col sm={10}>
+        <Col className="text-left" sm={10}>
           <Dropdown color="" isOpen={dropdownOpen} toggle={toggle}>
-            <DropdownToggle caret>{status === 0 ? "Not Complete Yet" : "Complete"}</DropdownToggle>
+            <DropdownToggle color="" className={status == 0 ? "labelNotComplete" : "labelComplete"} caret>
+              {status === 0 ? "Not Complete Yet" : "Complete"}
+            </DropdownToggle>
             <DropdownMenu>
               <DropdownItem onClick={(e) => setStatus(1)}>Complete</DropdownItem>
               <DropdownItem onClick={(e) => setStatus(0)}>Not Complete Yet</DropdownItem>
@@ -58,7 +60,10 @@ const FormCreateTodo = (props) => {
           </Dropdown>
         </Col>
       </FormGroup>
-      <Button onClick={handleCreate}>Create To Do</Button>
+      <Button className="btn rounded-pill btnCreate" onClick={handleCreate}>
+        <span className="fa fa-plus-circle pr-2"></span>
+        Create To Do
+      </Button>
     </Form>
   );
 };

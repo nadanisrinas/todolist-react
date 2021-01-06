@@ -1,0 +1,17 @@
+.labelComplete {
+  color: #000 !important;
+  background-color: #6cc070 !important;
+}
+
+.labelNotComplete {
+  color: #fff !important;
+  background-color: #003663 !important;
+}
+
+.textComplete {
+  color: #6cc070 !important;
+}
+
+.textNotComplete {
+  color: #003663 !important;
+}
