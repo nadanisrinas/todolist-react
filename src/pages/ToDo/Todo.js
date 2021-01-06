@@ -1,10 +1,19 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import TableListTodo from "../../components/Table/TableListTodo";
-import { Container, Row } from "reactstrap";
+import { Container, Row, Alert } from "reactstrap";
 import { Link } from "react-router-dom";
 //css
 import "../../assets/styles/button.css";
-const Todo = () => {
+const Todo = (props) => {
+  let dataSuccess = props.location.state;
+  const [success, setSuccess] = useState(false);
+  const [title, setTitle] = useState("");
+  useEffect(() => {
+    if (dataSuccess) {
+      setSuccess(dataSuccess.success);
+      setTitle(dataSuccess.title);
+    }
+  }, [success, title, dataSuccess]);
   return (
     <Fragment>
       <Container>
@@ -17,6 +26,13 @@ const Todo = () => {
             Create
           </Link>
         </Row>
+        {dataSuccess && (
+          <Row>
+            <Alert className="w-100" color={success ? "success" : "danger"} isOpen={success}>
+              To Do <span className="font-weight-bold">{title}</span> Berhasil Di Buat
+            </Alert>
+          </Row>
+        )}
         <Row>
           <TableListTodo />
         </Row>
