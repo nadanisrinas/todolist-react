@@ -1,7 +1,6 @@
 import { ADD_TODO, EDIT_TODO, DELETE_TODO } from "./actionTypes";
 import axios from "axios";
 
-let nextTodoId = 0;
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 //add item data todo
 export const addDataTodo = (todos) => {
@@ -23,6 +22,7 @@ export const editDataTodo = (todos) => {
 };
 //delete item data todo
 export const deleteDataTodo = (todos) => {
+  console.log("todos", todos);
   return {
     type: DELETE_TODO,
     payload: {
@@ -31,6 +31,7 @@ export const deleteDataTodo = (todos) => {
   };
 };
 
+//fetch api initial data todo
 export const getInitialTodo = () => {
   return async (dispatch) => {
     try {

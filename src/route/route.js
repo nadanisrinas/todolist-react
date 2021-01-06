@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //component
-import Todo from "../pages/Todo";
-import CreateToDo from "../pages/CreateToDo";
+import Todo from "../pages/ToDo/Todo";
+import CreateToDo from "../pages/CreateToDo/CreateToDo";
 
 const Path = () => {
   return (
