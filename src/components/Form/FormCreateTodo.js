@@ -24,7 +24,14 @@ const FormCreateTodo = (props) => {
         createdAt: new Date(),
       })
     );
-    history.push("/");
+    history.push({
+      pathname: "/",
+      state: {
+        title: title,
+        success: true,
+        time: 1000,
+      },
+    });
   };
   return (
     <Form>

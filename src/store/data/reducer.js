@@ -5,7 +5,6 @@ const initialState = {
 const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
-      console.log("action.payload.todos", action.payload.todos);
       state = {
         ...state,
         dataTodo: [...state.dataTodo, action.payload.todos].flat(),
